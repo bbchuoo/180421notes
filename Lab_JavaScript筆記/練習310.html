@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Exercises</title>
+
+
+<script>
+
+
+
+function Button1_onclick() {
+// 	debug.innerText = "line1<br>line2<br>"; 
+	// A 他會把他換成一行叫做line1<br>line2<br>的字
+	debug.innerHTML = "line1<br>line2<br>"; 
+	// B 會依照HTML的需要 換成 兩行字
+}
+
+
+</script>
+
+
+</head>
+<body>
+  <br/>
+<input type="text" value="add" id="txt1" name="txt1" >
+<br/>
+<br/>
+<input type="button" id="button" name="button" value="inputme" onclick="Button1_onclick();">
+<br/>
+<br/>
+<input type="text" value="add1" id="txt2" name="txt2">
+<div id="debug">debug<div>
+ 
+</body>
+</html>

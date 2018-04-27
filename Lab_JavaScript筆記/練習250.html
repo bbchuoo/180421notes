@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Exercises</title>
+
+
+<script>
+function add(){
+    for(var i=0;i<=5;i++)
+    {
+        
+    }
+    txt1.value = i;
+    txt2.value =add1(3,"?"); //把他放在這裡是因為
+    //他要讓function add1透過add跟他一起呼叫
+}
+function add1(count,what){
+    var line="";
+    for(var i =0;i<=count;i++){
+        line= line+what;
+    }
+    return line;
+/*要用return是因為 首先 從15行看到一個函式呼叫
+所以我們就跳進去函式裡面 3放進去 ?放進去
+有一個迴圈 所以我們做了四次 這件事情
+然後全部放進去line 函式結束就跳回去原本函式呼叫的地方
+但是並沒有告訴txt2.value的結果是 "????"
+所以就變成undefined 所以一定要再給一個return
+return代表函式結束 然後 **回傳**到呼叫的位置
+回傳進去 他就知道結果是"????''
+*/
+    
+}
+
+</script>
+
+
+</head>
+<body>
+  <br/>
+<input type="text" value="add" id="txt1" name="txt1" >
+<br/>
+<br/>
+<input type="button" id="button" name="button" value="inputme" onclick="add();">
+<br/>
+<br/>
+<input type="text" value="add1" id="txt2" name="txt2">
+ 
+</body>
+</html>

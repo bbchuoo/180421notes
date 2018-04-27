@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab</title>
+    <style>
+        .dragTarget {
+            float: left;
+            width: 60px;
+            height: 60px;
+            padding: 10px;
+            border: 2px solid gray;
+            margin: 10px;
+        }
+
+        .dragOver {
+            border: dashed gray;
+        }
+
+        div.flagList {
+            clear: both;/*清除float元素*/;
+        }
+
+            div.flagList img {
+                clear: both;
+                margin: 25px;
+            }
+    </style>
+</head>
+<body>
+ 
+      <div id="divJapan" class="dragTarget">Japan</div>
+    <div id="divUsa" class="dragTarget">USA</div>
+    <div id="divCanada" class="dragTarget">Canada</div>
+
+<!--draggable="true"這個意思是 可以拖曳嗎?true
+	如果你不加的話 預設是true
+	所以最好不要只靠系統的瀏覽器的預設值
+	因為這是這個程式很重要的 所以自己設定比較保險-->
+	
+	 <!-- doDragStart(event) 事件發生的時候把event物件傳進去下面的e
+	 dragstart事件:當用戶開始拖動元素時發生
+	 ondragstart="doDragStart(event);"
+	 ps:on是呼叫這個事件 所以前面才加on
+	 當用戶開始拖動元素的時候 把doDragStart(event);這個函式傳進去
+	 -->
+
+
+    <div class="flagList">
+        <img id="imgUsa"
+             draggable="true"
+             ondragstart="doDragStart(event);"
+             src="images/USA.png" />
+        <img id="imgCanada" draggable="true" src="images/Canada.png" />
+        <img id="imgJapan" draggable="true" src="images/Japan.png">
+    </div>
+
+    <div id="debug"></div>
+
+<script>
+
+
+/*doDragStart(e)要放一個參數接收一個event 也可以不寫
+  但標準寫法還是要寫比較好
+   不寫得化e.target.style.opacity = '0.4';的e要改成event
+   opacity讓他變得比較透明
+   
+   event也就是事件的意思，
+   就相當於把這個事件的對像傳給這個方法，
+   event包含了這個事件的所有參數和信息
+   
+   現在event發生的時候用target事件 
+   (target用法:獲取最初發生該事件的元素)
+   找到USA的id 然後把他串成字串 交給id:debug
+   
+   event有一個物件叫做dataTransfer
+        dataTransfer移轉資料的意思 其實就是資料袋
+        setData放資料進去 getData取出來
+        袋子可以放很多元的東西
+        e.dataTransfer.setData("text/plain",e.target.id);
+        所以要註記一下 他的形式是什麼
+        把e.target.id存進去資料袋裡面
+   
+   */
+
+   
+      function doDragStart(e) {
+            document.getElementById("debug").innerHTML += e.target.id + " start dragging. <br />";
+            e.target.style.opacity = '0.4';
+            e.dataTransfer.setData("text/plain", e.target.id);
+        }
+
+   /*第一種寫法就是直接在img裡面呼叫doDragStart(event);*/  
+    
+    
+    /* 第二種寫法 
+    document.getElementById("imgCanada").ondragstart=doDragStart;
+    也可以直接簡寫成下面這樣
+    找到imgCanada這個id然後用dragstart這個事件
+    並把doDragStart傳進去開始執行
+    */
+    
+    imgCanada.ondragstart=doDragStart;
+    
+    // 第三種寫法 addEventListener事件傾聽器
+    //注意去聽有沒有發生dragstart拖曳開始
+    //什麼東西(發生什麼事件的時候,怎麼做)
+    
+    imgJapan.addEventListener("dragstart",doDragStart);
+    
+ /*-----------------------------------------------*/
+
+/*
+dragenter:當拖動元素進入放置目標時發生
+所以當圖片進入divUsa就會做doDragEnter這個函式
+ondragleave:當拖動元素離開放置目標時發生
+所以當圖片離開divUsa就會做doDragLeave這個函式
+
+classList 屬性是取得元素 Class 的一種便利方式
+add（String [，String]）
+添加指定的類值。如果這些類已經存在於元素的屬性中，
+那麼它們將被忽略。
+
+*/
+
+/*---------------------------------------------------------------*/
+
+/*ondragover:當拖動元素位於放置目標上時發生
+要讓圖片可以放在div裡面
+*/
+
+        function doDragOver(e) {
+            
+            //document.getElementById("debug").innerHTML += e.target.id + " - OnDragOver<br />";
+            
+            e.preventDefault();
+        }
+
+        divUsa.ondragover = doDragOver;
+        divJapan.ondragover = doDragOver;
+        divCanada.ondragover = doDragOver;
+        
+ /*-----------------------------------------------*/        
+
+
+/*
+e.target.classList.add("dragOver");
+classList 屬性是取得元素 Class 的一種便利方式
+多了這一行就可以變成虛線
+*/
+
+        function doDragEnter(e) {
+            document.getElementById("debug").innerHTML += e.target.id + " - OnDragEnter<br />";
+            e.target.classList.add("dragOver");
+            e.preventDefault();
+        }
+        function doDragLeave(e) {
+            document.getElementById("debug").innerHTML += e.target.id + " - OnDragLeave<br />";
+            e.target.classList.remove("dragOver");
+            e.preventDefault();
+        }
+
+        divUsa.ondragenter = doDragEnter;
+        divUsa.ondragleave = doDragLeave;
+        divJapan.ondragenter = doDragEnter;
+        divJapan.ondragleave = doDragLeave;
+        divCanada.ondragenter = doDragEnter;
+        divCanada.ondragleave = doDragLeave;
+
+ /*-----------------------------------------------*/
+
+/*
+ondrop事件:當可拖動元素或文本選擇被放置在有效放置目標上時
+取一個變數var sSourceId
+把剛剛資料袋存的id都放進去
+sSourceId.substr(3, 99) == e.target.id.substr(3, 99)
+如果資料袋裡面的id取3~99之間 都跟發生target 3~99的id相同
+e.target.appendChild(document.getElementById(sSourceId));
+那就用 appendChild事件:新增一個段落
+輸出sSourceId變數接收到的id
+
+*/
+
+        function doDrop(e) {
+            document.getElementById("debug").innerHTML += e.target.id + " - OnDrop<br />";
+            var sSourceId = e.dataTransfer.getData("text/plain");
+            if (sSourceId.substr(3, 99) == e.target.id.substr(3, 99)) {
+                // document.getElementById("debug").innerHTML += "Yes, Matched<br />";
+                e.target.appendChild(document.getElementById(sSourceId));
+            }
+            e.target.classList.remove("dragOver");
+            e.preventDefault();
+        }
+
+        divUsa.ondrop = doDrop;
+        divJapan.ondrop = doDrop;
+        divCanada.ondrop = doDrop;
+
+ /*-----------------------------------------------*/
+
+/*ondragend:當用戶完成拖動元素時發生*/
+        function doDragEnd(e) {
+            e.target.style.opacity = "1.0";
+            e.preventDefault();
+        }
+        imgUsa.ondragend = doDragEnd;
+        imgJapan.ondragend = doDragEnd;
+        imgCanada.ondragend = doDragEnd;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        
+    </head>
+    <body>
+        <p>...</p>
+        <a href="http://chicago.cubs.mlb.com/" target="_blank" id="imgshref">
+            <img src="images/oak.gif" id="imgs"/>
+            </a>
+        <p>...</p>
+        <script type="text/javascript" >
+        
+        var iImage=0;
+        
+        setImage(); //呼叫函式放在哪都可以 只要找的到就好了
+        function setImage()
+        {
+        var img = new Array(); //定義一個陣列 並呼叫內建函式Array
+        var url = new Array();
+            img[0] = "images/oak.gif"; url[0]="http://chicago.cubs.mlb.com/";
+            img[1] = "images/chc.gif"; url[1]="http://chicago.cubs.mlb.com/";
+            img[2] = "images/sd.gif"; url[2]="http://chicago.cubs.mlb.com/";
+            img[3] = "images/was.gif"; url[3]="http://chicago.cubs.mlb.com/";
+           
+            
+        //Math.floor() 函式會回傳小於等於所給數字的最大整數。
+        //Math.random()隨機產生一個0-1之間的小數
+            
+        var iImage= Math.floor(Math.random()*img.length);
+        
+        //我們把0-1之間的亂數去乘img的長度(4),然後取整數
+        
+        iImage+=1;
+        if(iImage >= img.length){
+            iImage = 0;
+        }
+        /*呼叫我們的id並把陣列 傳進去*/    
+        document.getElementById("imgs").src =img[iImage];
+        document.getElementById("imgshref").href = url[iImage];
+        //讓他每三秒跑一次的化也可以用        document.getElementById("imgshref").href = url[iImage % 4];
+        //等於是 除以4然後取於數到四的時候餘數又變成0
+        
+        /*然後我們把整個陣列包裝成一個函士去呼叫 這樣他就會隨機轉換圖片*/
+        /*接下來要讓圖片可以三秒變換一次 所以我們用setTimeout*/
+        setTimeout(setImage,3000);
+        
+        } 
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Exercises</title>
+	
+<script>
+
+function add() {
+	var nTest;
+// 	nTest = Number("122.5") + 1 
+	// A 123.5 字串122.5加上數字1
+	//所以他把字串轉成數字相加 變成123.5
+	
+	
+	nTest = new Number(122.5) + 1 
+	// B 123.5 Number創造一個數字物件
+	
+// 	nTest = 122.5 + 1
+	// C 123.5
+	
+// 	nTest = "122.5" + 1  
+	// D 122.51
+
+	txt2.value = nTest;
+}
+
+// Number 物件主要的用途：
+// 如果參數沒辦法被轉換成數字，則它會回傳 NaN 。
+// 	nTest = new Number("sss") + 1
+// 	回傳NaN
+// 在不是使用建構式的情境中(即不用 new 運算子), 
+// Number 可以被用來轉換型別.
+//New的意思是先跟記憶體申請一塊區域放Number , New Number是正規寫法 也可以直接 Number就好
+//當我們使用new這個關鍵字時，
+//實際上會先有一個空的物件被建立的意思。
+
+</script>
+
+
+</head>
+<body>
+  <br/>
+<input type="text" value="add" id="txt1" name="txt1" >
+<br/>
+<br/>
+<input type="button" id="button" name="button" value="inputme" onclick="add();">
+<br/>
+<br/>
+<input type="text" value="add1" id="txt2" name="txt2">
+ 
+</body>
+</html>

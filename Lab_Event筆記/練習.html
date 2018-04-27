@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lab</title>
+<style type="text/css">
+.box {
+	position: fixed;
+	    /*如果沒有給position
+             我們如果要設定位置瀏覽器就不知道你的屬性是哪一種*/
+             /*fixed是固定定位 意味著元素會相對於瀏覽器來定位
+             即便頁面捲動他還是會在原來的位置
+             */
+	top: -200px;
+	left: 30%;
+	width: 450px;
+	background-color: #fff;
+	color: #7F7F7F;
+	padding: 20px;
+	border: 2px solid #ccc;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-box-shadow: 0 1px 5px #333;
+	             /*shadow陰影
+             依序表示水平位移距離 (x) 
+             垂直位移距離 (y) 
+             模糊強度 (blur) 增加模糊度也會造成陰影更透明
+             擴散強度 (spread) 
+             ，不可被其它的值插進其間。
+             */
+	-webkit-box-shadow: 0 1px 5px #333;
+	z-index: 101;
+	             /*靠近使用者眼睛的距離
+             物件的前後順序
+             */
+
+	-webkit-transition: all 3s ease-out;
+	-ms-transition: all 3s ease-out;
+	transition: all 3s ease-out;
+	     /*什麼地方發生變化,動畫要發生多久,先快後慢*/
+}
+
+.box h1 {
+	border-bottom: 1px dashed #7F7F7F;
+	margin: -20px -20px 0px -20px;
+	padding: 10px;
+	background-color: #FFEFEF;
+	color: #EF7777;
+	-moz-border-radius: 20px 20px 0px 0px;
+	-webkit-border-top-left-radius: 20px;
+	-webkit-border-top-right-radius: 20px;
+	-khtml-border-top-left-radius: 20px;
+	-khtml-border-top-right-radius: 20px;
+}
+
+a.boxclose {
+	float: right;
+	width: 26px;
+	height: 26px;
+	background: transparent url(images/cancel.png) repeat top left;
+	/*	background: transparent;背景透明
+        	預設值就是透明 不寫也沒關係
+        	*/
+	margin-top: -30px;
+	margin-right: -30px;
+	/*這裡用margin是因為要設定按鈕的外邊距*/
+	cursor: pointer;
+	/*cursor滑鼠移動到上面的時候變成手指*/
+}
+</style>
+</head>
+<body>
+	<img src="images/clickme.png" onclick="doAnimateShow();">
+
+	<div class="box" id="box">
+		<a class="boxclose" id="boxclose"></a>
+		<h1>Important message</h1>
+		<p>Here comes a very important message for your user. Turn this
+			window off by clicking the cross.</p>
+	</div>
+ <!--在 <script></script>之間寫一個名為 doAnimateShow() 的函數，
+	該函數沒有參數，利用 getElementById 找到 id 為 box 的元素，
+	找到後，將元素的 top 座標改成 200px，完成後的程式如下-->
+
+	<script>
+		function doAnimateShow() {
+			document.getElementById("box").style.top = "200px";
+			document.getElementById("box").style.left = event.clientX + "px";
+			//clientX的意思一個瀏覽器式窗扣掉標頭邊框內部的區域的X座標
+		document.getElementById("box").style.top = event.clientY + "px";
+		/*event就是事件的意思
+		clientX 事件,返回當事件被觸發時鼠標指針向對於瀏覽器頁面（或客戶區）的水平坐標。*/
+			
+		}
+
+		function doAnimateHide() {
+			document.getElementById("box").style.top = "-200px";
+		
+			 event.cancelBubble = true;
+			 
+			 //event是一個事件發生的時候 自動會提供給你用的物件
+			 //可以透過他去了解現在的資訊
+			 //cancelBubble是我做完這個小範圍的XX的事件之後
+			 //透過event物件取消泡泡繼續向外吹的這個動作
+			 
+			 
+			//一定這寫這一行 因為點XX也等於是點到div
+			//所以他就不知道要做XX的事情
+			
+			//
+			
+			//也可以這樣寫
+			// event.stopPropagation(); 停止擴散
+		}
+		
+		document.getElementById("boxclose").onclick = doAnimateHide;
+		document.onclick = doAnimateShow; //點任何位置都能召喚出盒子
+	</script>
+
+</body>
+</html>

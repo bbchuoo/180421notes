@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Exercises</title>
+	
+<script>
+function add(){
+  var user = text1.value;
+//宣告一個變數user 然後把text1.value放進去
+  user = "hello" + user;
+//所以user就是 hello + add(text1的內容)
+  text2.value =user;
+//然後讓user顯示在text2裡面 按下按鈕的時候就會執行
+}
+
+</script>
+
+
+</head>
+<body>
+  <br/>
+<input type="text" value="add" id="text1" name="text1" >
+<br/>
+<br/>
+<input type="button" id="button" name="button" value="inputme" onclick="add();">
+<br/>
+<br/>
+<input type="text" value="add1" id="text2" name="text2">
+ 
+</body>
+</html>

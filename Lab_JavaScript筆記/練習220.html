@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Exercises</title>
+	
+<script>
+
+
+
+function add() {
+	//只要是有資料都是true 數字0也是false
+	
+    // 	var test = true;   // yes
+	// var test = 0;      //  no
+    // 	var test = 3 > 0;  //  yes
+    // 	var test = "";     //  no
+	var test = null;   //  no
+	
+	if (test) {
+		txt1.value = "Yes";	
+	}
+	else {
+		txt1.value = "No";
+	}	
+}
+</script>
+
+
+</head>
+<body>
+  <br/>
+<input type="text" value="add" id="txt1" name="txt1" >
+<br/>
+<br/>
+<input type="button" id="button" name="button" value="inputme" onclick="add();">
+<br/>
+<br/>
+<input type="text" value="add1" id="txt2" name="txt2">
+ 
+</body>
+</html>

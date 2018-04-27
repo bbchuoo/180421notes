@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Exercises</title>
+
+
+
+<script>
+
+function Button1_onclick() {
+	// var seasons = new Array("春", "夏", "秋", "冬");  // 正規寫法
+	var seasons = ["春", "夏", "秋", "冬"];  
+
+	seasons[3] = "暖冬"; 
+
+	var result ="";
+
+	for (var i = 0; i < seasons.length; i++) {
+		result += seasons[i] + "<br>";
+		/*length代表取得字串的長度判斷
+		i是0,那如果i<seasons這個陣列的長度,那他就在+1
+		由此可知我們的陣列長度是 0 1 2 3 總共是 4
+		所以 result = result + seasins[0, 1, 2, 3];個別會印出來
+		*/
+	}
+
+	debug.innerHTML = result;
+
+}
+
+
+//以下範例要搞清楚
+// var a="";
+// function for_(){
+// 	for(var i=0;i<=5;i++){
+// a = a+i;
+// 	}
+// 	alert(a);
+// }
+
+// var b=0;
+// function for1_(){
+// 	for(var ii=0;ii<=10;ii++){
+// 		b =b+ii;
+// 	}
+// 	alert(b);
+// }
+
+</script>
+
+
+
+</head>
+<body>
+  <br/>
+<input type="text" value="add" id="txt1" name="txt1" >
+<br/>
+<br/>
+<input type="button" id="button" name="button" value="inputme" onclick="Button1_onclick();">
+<br/>
+<br/>
+<input type="text" value="add1" id="txt2" name="txt2">
+<div id="debug">debug<div>
+ 
+</body>
+</html>

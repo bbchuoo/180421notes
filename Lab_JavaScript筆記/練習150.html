@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Exercises</title>
+	
+<script>
+
+function add(){
+    
+    var s =new String("1234567中文字");
+    var ss=new String ("100003");
+    
+    txt1.value= s.length;
+    //length代表取得字串的長度判斷
+    txt2.value=s.substr(2,5);
+    // 1 2 3 4 5 6 7 中 文 字
+    // 0 1 2 3 4 5 6  7  8  9 
+  //從第二個(3)往後算5個位置所以是(7)  
+    txt3.value=ss.substr(1,5);
+} 
+
+</script>
+
+
+</head>
+<body>
+  <br/>
+<input type="text" value="add" id="txt1" name="txt1" >
+<br/>
+<br/>
+<input type="button" id="button" name="button" value="inputme" onclick="add();">
+<br/>
+<br/>
+<input type="text" value="add1" id="txt2" name="txt2">
+<input type="text" value="add3" id="txt3" name="txt3">
+ 
+</body>
+</html>
